@@ -1,4 +1,4 @@
-# Laravel 5.1 and Dropzone.js auto image uploads with removal links
+# Laravel 5.2 and Dropzone.js auto image uploads with removal links
 
 This project is related to tutorial from [Codingo Tuts].
 
@@ -14,4 +14,4 @@ What is covered in this tutorial:
 
     
 
-[Codingo Tuts]:http://tuts.codingo.me/laravel-5-1-and-dropzone-js-auto-image-uploads-with-removal-links/
+[Codingo Tuts]:https://tuts.codingo.me/laravel-5-1-and-dropzone-js-auto-image-uploads-with-removal-links/

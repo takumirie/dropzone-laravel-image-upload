@@ -2,12 +2,13 @@
 
 namespace App\Logic\Image;
 
-use App\Models\Image;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
+use App\Models\Image;
+
 
 class ImageRepository
 {
@@ -93,7 +94,10 @@ class ImageRepository
     public function icon( $photo, $filename )
     {
         $manager = new ImageManager();
-        $image = $manager->make( $photo )->resize(200, null, function($constraint){$constraint->aspectRatio();})->save( Config::get('images.icon_size')  . $filename );
+        $image = $manager->make( $photo )->resize(200, null, function ($constraint) {
+            $constraint->aspectRatio();
+            })
+            ->save( Config::get('images.icon_size')  . $filename );
 
         return $image;
     }

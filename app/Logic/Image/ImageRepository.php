@@ -29,16 +29,15 @@ class ImageRepository
         $photo = $form_data['file'];
 
         $originalName = $photo->getClientOriginalName();
-        $originalNameWithoutExt = substr($originalName, 0, strlen($originalName) - 4);
+        $extension = $photo->getClientOriginalExtension();
+        $originalNameWithoutExt = substr($originalName, 0, strlen($originalName) - strlen($extension) - 1);
 
         $filename = $this->sanitize($originalNameWithoutExt);
-        $allowed_filename = $this->createUniqueFilename( $filename );
+        $allowed_filename = $this->createUniqueFilename( $filename, $extension );
 
-        $filenameExt = $allowed_filename .'.jpg';
+        $uploadSuccess1 = $this->original( $photo, $allowed_filename );
 
-        $uploadSuccess1 = $this->original( $photo, $filenameExt );
-
-        $uploadSuccess2 = $this->icon( $photo, $filenameExt );
+        $uploadSuccess2 = $this->icon( $photo, $allowed_filename );
 
         if( !$uploadSuccess1 || !$uploadSuccess2 ) {
 
@@ -62,19 +61,19 @@ class ImageRepository
 
     }
 
-    public function createUniqueFilename( $filename )
+    public function createUniqueFilename( $filename, $extension )
     {
         $full_size_dir = Config::get('images.full_size');
-        $full_image_path = $full_size_dir . $filename . '.jpg';
+        $full_image_path = $full_size_dir . $filename . '.' . $extension;
 
         if ( File::exists( $full_image_path ) )
         {
             // Generate token for image
             $imageToken = substr(sha1(mt_rand()), 0, 5);
-            return $filename . '-' . $imageToken;
+            return $filename . '-' . $imageToken . '.' . $extension;
         }
 
-        return $filename;
+        return $filename . '.' . $extension;
     }
 
     /**
@@ -83,7 +82,7 @@ class ImageRepository
     public function original( $photo, $filename )
     {
         $manager = new ImageManager();
-        $image = $manager->make( $photo )->encode('jpg')->save(Config::get('images.full_size') . $filename );
+        $image = $manager->make( $photo )->save(Config::get('images.full_size') . $filename );
 
         return $image;
     }
@@ -94,7 +93,7 @@ class ImageRepository
     public function icon( $photo, $filename )
     {
         $manager = new ImageManager();
-        $image = $manager->make( $photo )->encode('jpg')->resize(200, null, function($constraint){$constraint->aspectRatio();})->save( Config::get('images.icon_size')  . $filename );
+        $image = $manager->make( $photo )->resize(200, null, function($constraint){$constraint->aspectRatio();})->save( Config::get('images.icon_size')  . $filename );
 
         return $image;
     }
@@ -120,8 +119,8 @@ class ImageRepository
 
         }
 
-        $full_path1 = $full_size_dir . $sessionImage->filename . '.jpg';
-        $full_path2 = $icon_size_dir . $sessionImage->filename . '.jpg';
+        $full_path1 = $full_size_dir . $sessionImage->filename;
+        $full_path2 = $icon_size_dir . $sessionImage->filename;
 
         if ( File::exists( $full_path1 ) )
         {

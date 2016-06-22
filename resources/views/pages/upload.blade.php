@@ -87,5 +87,6 @@
         </div>
     </div>
     <!-- End Dropzone Preview Template -->
+    {!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}
 
 @stop

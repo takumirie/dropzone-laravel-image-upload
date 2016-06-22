@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Image upload in Laravel 5.1 with Dropzone.js</title>
+    <title>Image upload in Laravel 5.2 with Dropzone.js</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {!! HTML::style('/packages/bootstrap/css/bootstrap.min.css') !!}

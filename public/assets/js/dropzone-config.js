@@ -18,7 +18,7 @@ Dropzone.options.realDropzone = {
             $.ajax({
                 type: 'POST',
                 url: 'upload/delete',
-                data: {id: file.name},
+                data: {id: file.name, _token: $('#csrf-token').val()},
                 dataType: 'html',
                 success: function(data){
                     var rep = JSON.parse(data);

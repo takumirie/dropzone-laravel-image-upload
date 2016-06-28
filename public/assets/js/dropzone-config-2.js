@@ -24,6 +24,8 @@ Dropzone.options.realDropzone = {
                 myDropzone.options.addedfile.call(myDropzone, file);
                 myDropzone.options.thumbnail.call(myDropzone, file, 'images/icon_size/' + value.server);
                 myDropzone.emit("complete", file);
+                photo_counter++;
+                $("#photoCounter").text( "(" + photo_counter + ")");
             });
         });
 

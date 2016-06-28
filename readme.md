@@ -2,7 +2,7 @@
 
 This project is related to tutorial from [Codingo Tuts].
 
-What is covered in this tutorial: 
+What is covered in this project:
 
     - Auto image upload
     - Remove images directly from Dropzone preview with AJAX request
@@ -11,6 +11,7 @@ What is covered in this tutorial:
     - Using Image Intervention package for resizing and image encoding
     - Saving image data to database
     - Unique file names for images on server side
+    - Displaying already uploaded images in Dropzone
 
     
 

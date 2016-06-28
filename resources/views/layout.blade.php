@@ -29,6 +29,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/">Upload</a></li>
+                <li><a href="/example-2">Upload-2</a></li>
             </ul>
         </div>
     </div>

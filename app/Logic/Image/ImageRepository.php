@@ -31,7 +31,7 @@ class ImageRepository
 
         $originalName = $photo->getClientOriginalName();
         $extension = $photo->getClientOriginalExtension();
-        $originalNameWithoutExt = substr($originalName, 0, strlen($originalName) - strlen($extension) - 1);
+        $originalNameWithoutExt = rtrim($originalName,$extension);
 
         $filename = $this->sanitize($originalNameWithoutExt);
         $allowed_filename = $this->createUniqueFilename( $filename, $extension );
